@@ -10,7 +10,8 @@ class App extends Component {
     friends: friends,
     friendsClicked: [0],
     score: 0,
-    highScore: 0
+    highScore: 0,
+    responseText: "Click a picture to start!"
   };
 
   removeFriend = id => {
@@ -30,11 +31,11 @@ class App extends Component {
     if (this.state.highScore < newHighScore) {
       this.setState({highScore: newHighScore});
     }
-    this.setState({score: 0, friendsClicked: [0]});
+    this.setState({score: 0, friendsClicked: [0], responseText: "You guessed wrong!"});
   }
 
   scoreUp = () => {
-    this.setState({score: this.state.score + 1})
+    this.setState({score: this.state.score + 1, responseText: "You guessed right!"})
   }
 
   shuffle = () => {
@@ -67,6 +68,8 @@ class App extends Component {
       <Wrapper>
         <Title>GoT Clicker Game!</Title>
         <h3 style={this.style.score}>Score: {this.state.score}   High Score: {this.state.highScore}</h3>
+        <h3 style={this.style.score}>{this.state.responseText}</h3>
+
         {
           this.state.friends.map(friend => (
             <FriendCard
